@@ -35,15 +35,11 @@ grad = zeros(size(theta));
 %           temp(1) = 0;   % because we don't add anything for j = 0  
 %           grad = grad + YOUR_CODE_HERE (using the temp variable)
 %
-
-
-
-
-
-
-
-
-
+h_theta = sigmoid(X * theta);
+reg_theta = theta';
+reg_theta(1) = 0; % if j = 0 the lambda * theta_j / m := 0
+J = (1.0 / m) * sum( -y .* log(h_theta) - (1 - y) .* log(1 - h_theta)) + reg_theta * theta * lambda ./ (2 * m);
+grad = (1.0 / m) * sum(repmat((h_theta - y), size(theta')) .* X) + reg_theta * (lambda / m);
 
 % =============================================================
 
